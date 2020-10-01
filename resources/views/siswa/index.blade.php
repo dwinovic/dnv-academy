@@ -6,7 +6,7 @@
 <div class="alert alert-success" role="alert">
     {{session('sukses')}}
 </div>
-@endif
+@endif 
 
 <div class="row">
     <div class="div col-6">
@@ -54,7 +54,10 @@
         <td> {{$siswa -> jenis_kelamin}} </td>
         <td> {{$siswa -> agama}} </td>
         <td> {{$siswa -> alamat}} </td>
-        <td><a type="button" class="btn btn-warning btn-sm" href="/siswa/{{$siswa -> id}}/edit">Edit</a></td>
+        <td>
+            <a type="button" class="btn btn-warning btn-sm" href="/siswa/{{$siswa -> id}}/edit">Edit</a>
+            <a type="button" class="btn btn-danger btn-sm" href="/siswa/{{$siswa -> id}}/delete" onclick="return confirm('Yakin mau dihapus?')">Delete</a>
+        </td>
     </tr>
     @endforeach
 </table>
@@ -87,11 +90,15 @@
                             placeholder="Nama Belakang">
                     </div>
 
-                    <select name="jenis_kelamin" class="custom-select">
-                        <option selected>Jenis Kelamin</option>
-                        <option value="1">Laki - laki</option>
-                        <option value="2">Perempuan</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="">Jenis Kelamin</label>
+                        <select name="jenis_kelamin" class="custom-select">
+                            <option value="L">Laki - laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
+
+                    </div>
+
 
                     <div class="form-group">
                         <label for="exampleInputPassword1">Agama</label>

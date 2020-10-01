@@ -26,6 +26,8 @@ Route::post('/siswa/create', 'SiswaController@create');
 Route::get('/siswa/{id}/edit', 'SiswaController@edit');
 
 //Update data
-Route::post('/siswa/{id}/update', 'SiswaController@update');
+Route::post('/siswa/{id}/update', 'SiswaController@update'); 
 
+// Delete data
+Route::get('/siswa/{id}/delete', 'SiswaController@delete');
 
