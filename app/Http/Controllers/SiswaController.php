@@ -6,10 +6,17 @@ use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     { 
-        // Menghubungkan data dengan view
-        $data_siswa = \App\Siswa::all();
+        // Request ini bertujuan untuk manarik data dari query string
+        // dd($request -> all());
+        // Conditional untuk menentukan logika pencarian
+        if($request->has('cari')){
+            $data_siswa = \App\Siswa::where('nama_depan', 'LIKE', '%'.$request->cari.'%')->get();
+        } else {
+            $data_siswa = \App\Siswa::all();
+        } 
+        // Menghubungkan data dengan view 
         return view('siswa.index', ['data_siswa' => $data_siswa]);
     }
 

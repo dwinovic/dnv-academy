@@ -110,12 +110,7 @@
                         <label for="exampleFormControlTextarea1">Alamat</label>
                         <textarea name="alamat" class="form-control" id="exampleFormControlTextarea1" rows="3"
                             placeholder="Alamat"></textarea>
-                    </div>
-
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
+                    </div> 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
