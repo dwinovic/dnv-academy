@@ -1,66 +1,71 @@
 @extends('layout.master');
 
-@section('content');
+@section('content'); 
 
-@if(session('sukses'))
+<div class="main">
+    <div class="main-content">
+        <div class="container-fluid">
+            @if(session('sukses'))
 <div class="alert alert-success" role="alert">
     {{session('sukses')}}
 </div>
 @endif 
-
-<div class="row">
-    <div class="div col-6">
-        <h1>
-            Data Siswa
-        </h1>
+            <div class="row">
+                <div class="col-md-12"> 
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Data Siswa</h3> 
+                            <div class="right"> 
+                                <button type="button" data-toggle="modal"data-target="#exampleModal" class="btn"><i class="lnr lnr-plus-circle"></i></button>
+                            </div> 
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Nama Depan
+                                        </th>
+                                        <th>
+                                            Nama Belakang
+                                        </th>
+                                        <th>
+                                            Jenis Kelamin
+                                        </th>
+                                        <th>
+                                            Agama
+                                        </th>
+                                        <th>
+                                            Alamat
+                                        </th>
+                                        <th>
+                                            Edit
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody> 
+                                    {{-- @foreach = looping yang digunakan untuk menampilkan dapa --}} 
+                                    @foreach ($data_siswa as $siswa) 
+                                    <tr>
+                                        <td> {{$siswa -> nama_depan}} </td>
+                                        <td> {{$siswa -> nama_belakang}} </td>
+                                        <td> {{$siswa -> jenis_kelamin}} </td>
+                                        <td> {{$siswa -> agama}} </td>
+                                        <td> {{$siswa -> alamat}} </td>
+                                        <td>
+                                            <a type="button" class="btn btn-warning btn-sm" href="/siswa/{{$siswa -> id}}/edit">Edit</a>
+                                            <a type="button" class="btn btn-danger btn-sm" href="/siswa/{{$siswa -> id}}/delete" onclick="return confirm('Yakin mau dihapus?')">Delete</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="div col-6 flex d-flex align-items-center justify-content-end">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal"
-            data-target="#exampleModal">
-            Tambah Data
-        </button>
-    </div>
-</div>
-
-<table class="table table-hover">
-    <tr>
-        <th>
-            Nama Depan
-        </th>
-        <th>
-            Nama Belakang
-        </th>
-        <th>
-            Jenis Kelamin
-        </th>
-        <th>
-            Agama
-        </th>
-        <th>
-            Alamat
-        </th>
-        <th>
-            Edit
-        </th>
-    </tr>
-
-    {{-- @foreach = looping yang digunakan untuk menampilkan dapa --}}
-    @foreach ($data_siswa as $siswa)
-    <tr>
-        <td> {{$siswa -> nama_depan}} </td>
-        <td> {{$siswa -> nama_belakang}} </td>
-        <td> {{$siswa -> jenis_kelamin}} </td>
-        <td> {{$siswa -> agama}} </td>
-        <td> {{$siswa -> alamat}} </td>
-        <td>
-            <a type="button" class="btn btn-warning btn-sm" href="/siswa/{{$siswa -> id}}/edit">Edit</a>
-            <a type="button" class="btn btn-danger btn-sm" href="/siswa/{{$siswa -> id}}/delete" onclick="return confirm('Yakin mau dihapus?')">Delete</a>
-        </td>
-    </tr>
-    @endforeach
-</table>
 </div>
 
 <!-- Modal = Button untuk menambahkan data, baca di documentasi bootstrap-->
@@ -91,8 +96,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="">Jenis Kelamin</label>
-                        <select name="jenis_kelamin" class="custom-select">
+                        <label for="exampleGender">Jenis Kelamin</label> <br>
+                        <select name="jenis_kelamin" class="form-control">
                             <option value="L">Laki - laki</option>
                             <option value="P">Perempuan</option>
                         </select>
