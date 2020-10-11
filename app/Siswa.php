@@ -10,6 +10,6 @@ class Siswa extends Model
     protected $table = 'siswa';
 
     // Untuk mengatasi error mass asignment
-    protected $fillable = ['nama_depan', 'nama_belakang', 'jenis_kelamin', 'agama', 'alamat'];
+    protected $fillable = ['nama_depan', 'nama_belakang', 'jenis_kelamin', 'agama', 'alamat', 'avatar'];
     
 }
