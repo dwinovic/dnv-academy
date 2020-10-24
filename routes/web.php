@@ -20,11 +20,15 @@ Route::post('/postlogin', 'AuthController@postlogin');
 
 // Route Group => middleware auth
 Route::group(['middleware' => 'auth'], function () {
+
+    // Home
     Route::get('/', function () {
-        return view('/dashboard');
+        return view('dashboard.index');
     }); 
+
     Route::get('/dashboard', 'DashboardController@index');
     
+    // Tabel Siswa
     Route::get('/siswa', 'SiswaController@index');
     
     // Menghandle dari inputan data
@@ -38,6 +42,9 @@ Route::group(['middleware' => 'auth'], function () {
     
     // Delete data
     Route::get('/siswa/{id}/delete', 'SiswaController@delete');
+    
+    // Profile data
+    Route::get('/siswa/{id}/profile', 'SiswaController@profile');
 });
 
 //Logout

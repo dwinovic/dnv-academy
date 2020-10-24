@@ -17,7 +17,7 @@ class SiswaController extends Controller
             $data_siswa = \App\Siswa::all();
         } 
         // Menghubungkan data dengan view 
-        return view('siswa.index', ['data_siswa' => $data_siswa]);
+        return view('siswa.siswa_index', ['data_siswa' => $data_siswa]);
     }
 
     public function create(Request $request)
@@ -36,14 +36,22 @@ class SiswaController extends Controller
         // dd($siswa);
 
         // Membuat view dan memasukkan variable kedalam view
-        return view('siswa.edit', ['siswa' => $siswa]);
+        return view('siswa.siswa_edit', ['siswa' => $siswa]);
     }
 
     // Updating data
     public function update(Request $request, $id) 
     { 
+        // dd($request->all());
         $siswa = \App\Siswa::find($id);
-        $siswa -> update($request->all());
+        $siswa -> update($request->all()); 
+        
+        if($request->hasFile('avatar')) { 
+            $request -> file('avatar') -> move('images/', $request -> file('avatar')->getClientOriginalName());
+            $siswa->avatar = $request -> file('avatar')->getClientOriginalName();
+            $siswa->save();
+        }
+
         return redirect('siswa')->with('sukses', 'Data Berhasil di Input'); 
     }
 
@@ -53,5 +61,12 @@ class SiswaController extends Controller
         $siswa = \App\Siswa::find($id);
         $siswa -> delete();
         return redirect('siswa')->with('sukses', 'Data Berhasil di di Hapus');
+    }
+
+    // Profile Siswa
+    public function profile($id) 
+    {   
+        $siswa = \App\Siswa::find($id);
+        return view('siswa.siswa_profile', ['siswa' => $siswa]);
     }
 }
