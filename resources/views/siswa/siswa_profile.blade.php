@@ -48,13 +48,13 @@
         <!-- END LEFT COLUMN -->
         <!-- RIGHT COLUMN -->
         <div class="profile-right">
-          <h4 class="heading">Samuel's Awards</h4>
+          <h4 class="heading">Aktifitas {{$siswa->nama_depan}}</h4>
 
           <!-- END AWARDS -->
           <!-- TABBED CONTENT -->
           <div class="custom-tabs-line tabs-line-bottom left-aligned">
             <ul class="nav" role="tablist">
-              <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab" aria-expanded="true">Recent Activity</a></li> 
+              <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab" aria-expanded="true">Aktifitas Terakhir</a></li> 
             </ul>
           </div>
           <div class="tab-content">
