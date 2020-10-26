@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +19,13 @@ Route::get('/login', 'AuthController@login')->name('login');
 
 Route::post('/postlogin', 'AuthController@postlogin');
 
+//Logout
+Route::get('/logout', 'AuthController@logout');
+
 // Route Group => middleware auth
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'CheckRole:admin']], function () {
 
-    // Home
-    Route::get('/', function () {
-        return view('dashboard.index');
-    }); 
-
+    
     Route::get('/dashboard', 'DashboardController@index');
     
     // Tabel Siswa
@@ -45,8 +45,12 @@ Route::group(['middleware' => 'auth'], function () {
     
     // Profile data
     Route::get('/siswa/{id}/profile', 'SiswaController@profile');
+
 });
 
-//Logout
-Route::get('/logout', 'AuthController@logout');
-
+Route::group(['middleware' => ['auth', 'CheckRole:admin,siswa']], function () {
+    // Home
+    Route::get('/', function () {
+        return view('dashboard.index');
+    }); 
+});
