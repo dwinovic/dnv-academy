@@ -98,6 +98,21 @@ class SiswaController extends Controller
     public function profile($id) 
     {   
         $siswa = \App\Siswa::find($id);
-        return view('siswa.siswa_profile', ['siswa' => $siswa]);
+        $matapelajaran = \App\Mapel::all();
+        return view('siswa.siswa_profile', ['siswa' => $siswa, 'matapelajaran' => $matapelajaran]);
+    } 
+
+    // Memasukkan data ke pivot
+    public function addnilai(Request $request, $idsiswa)
+    {
+        // dd($request->all());
+        $siswa = \App\Siswa::find($idsiswa);
+        if($siswa->mapel()->where('mapel_id', $request->mapel)->exists()){
+            return redirect('siswa/'.$idsiswa.'/profile')->with('error', 'Nilai sudah tersedia');
+        }
+        // Relation
+        $siswa->mapel()->attach($request->mapel, ['nilai' => $request->nilai]); 
+
+        return redirect('siswa/'.$idsiswa.'/profile')->with('sukses', 'Nilai Berhasil di tambahkan');
     }
 }

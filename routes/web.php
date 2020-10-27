@@ -46,6 +46,9 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin']], function () {
     // Profile data
     Route::get('/siswa/{id}/profile', 'SiswaController@profile');
 
+    // Add Nilai
+    Route::post('/siswa/{id}/addnilai', 'SiswaController@addnilai');
+
 });
 
 Route::group(['middleware' => ['auth', 'CheckRole:admin,siswa']], function () {
