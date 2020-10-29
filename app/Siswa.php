@@ -17,7 +17,7 @@ class Siswa extends Model
     public function getAvatar()
     { 
         if(!$this -> avatar){
-            return asset('images/default.jpg');
+            return asset('images/default.png');
         }
 
         return asset('images/' .$this->avatar);
