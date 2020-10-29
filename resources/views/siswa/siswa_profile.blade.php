@@ -1,5 +1,9 @@
 @extends('layout.master');
 
+@section('header')
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+@endsection
+
 @section('content');
 <div class="main"> 
   <div class="main-content">
@@ -84,6 +88,7 @@
                       <th>NAMA</th>
                       <th>SEMESTER</th>
                       <th>NILAI</th>
+                      <th>AKSI</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -92,7 +97,8 @@
                       <td>{{$mapel->kode}}</td>
                       <td>{{$mapel->nama}}</td>
                       <td>{{$mapel->semester}}</td>
-                      <td>{{$mapel->pivot->nilai}}</td> 
+                      <td><a href="#" class="nilai" data-type="text" data-pk="{{$mapel->id}}" data-url="/api/siswa/{{$siswa->id}}/editnilai" data-title="Masukkan nilai">{{$mapel->pivot->nilai}}</a></td> 
+                    <td><a type="button" class="btn btn-danger btn-sm" href="/siswa/{{$siswa->id}}/{{$mapel->id}}/deletenilai" onclick="return confirm('Yakin mau dihapus?')">Delete</a></td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -153,7 +159,8 @@
 @stop
 
 @section('footer')
-  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>  
+  <script src="https://code.highcharts.com/highcharts.js"></script> 
   <script> 
     Highcharts.chart('chartNilai', {
         chart: {
@@ -189,5 +196,10 @@
             data: {!!json_encode($data)!!} 
         }]
     });
-  </script>
+
+    // JQuery Ajax Editable
+    $(document).ready(function() {
+        $('.nilai').editable();
+    });
+  </script> 
 @endsection

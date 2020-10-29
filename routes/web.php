@@ -49,6 +49,9 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin']], function () {
     // Add Nilai
     Route::post('/siswa/{id}/addnilai', 'SiswaController@addnilai');
 
+    // Delete Nilai
+    Route::get('/siswa/{id}/{idmapel}/deletenilai', 'SiswaController@deletenilai');
+
 });
 
 Route::group(['middleware' => ['auth', 'CheckRole:admin,siswa']], function () {
